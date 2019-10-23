@@ -104,7 +104,7 @@ bool Executive::parseInputFile() {
         std::cout << "Inserting node: " <<input <<std::endl;
         int strInt = std::stoi(input);
         min3_heap.Insert(strInt);
-        max3_heap.Insert(strInt);
+        // max3_heap.Insert(strInt);
         input = "";
       }
     }

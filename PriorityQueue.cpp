@@ -58,21 +58,22 @@ void PriorityQueue::RecInsert(int * value, int rootIndex) {
         pq_arr[getChildOf(rootIndex, 1)] = value;
       }
       else {
-        RecMinHeapify(getChildOf(rootIndex, 1));
-        RecMinHeapify(getChildOf(rootIndex, 2));
-        RecMinHeapify(getChildOf(rootIndex, 3));
+        RecInsert(value, getChildOf(rootIndex, 1));
+        RecInsert(value, getChildOf(rootIndex, 2));
+        RecInsert(value, getChildOf(rootIndex, 3));
       }
   }
 }
 
 void PriorityQueue::Insert(int value) {
-  int * v = new int;
-  *v = value;
   if(pq_arr[0] == nullptr) {
     std::cout <<"Empty Array, adding first item.\n";
-    pq_arr[0] = v;
+    pq_arr[0] = &value;
   }
-  RecInsert(v, 0);
+  else {
+    std::cout <<"First Node: " <<pq_arr[0] <<std::endl;
+    RecInsert(&value, 0);
+  }
 }
 
 bool PriorityQueue::Delete(int value) {
