@@ -8,16 +8,31 @@ class PriorityQueue {
     //Constructor
     PriorityQueue();
 
-    //Class Functions
-    bool Insert(int value);
+    //Class Methods
+    void RecMinHeapify(int rootIndex);
+    void RecMaxHeapify(int rootIndex);
+    void MinHeapify();
+    void MaxHeapify();
+
+    void RecInsert(int * value, int index);
+    void Insert(int value);
+
     bool Delete(int value);
+
     int PQ_Highest();
     int PQ_Lowest();
+
+    void RecLevelOrder(int rootIndex);
     void LevelOrder();
+
     double Time_LowestPQ();
 
-  private:
+    //Helper Functions
+    int getChildOf(int parentNum, int childNum);
+    int getParentOf(int childNum);
 
+  private:
+    int * pq_arr[10];
 };
 
 #endif

@@ -8,16 +8,18 @@
 
 class Executive {
   public:
+    //Constructor
     Executive(std::string path);
 
+    //Class Methods
     int menuInput();
     void run();
     bool parseInputFile();
 
   private:
     std::string filePath;
-    PriorityQueue* pq;
-
+    PriorityQueue min3_heap;
+    PriorityQueue max3_heap;
 };
 
 #endif
