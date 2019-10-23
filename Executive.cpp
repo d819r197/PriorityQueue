@@ -7,6 +7,8 @@
 
 Executive::Executive(std::string path) {
   filePath = path;
+  min3_heap = new PriorityQueue;
+  max3_heap = new PriorityQueue;
 }
 
 int Executive::menuInput() {
@@ -37,8 +39,9 @@ void Executive::run() {
           int input;
           std::cout << "Please enter the value which you want to enter into the PriorityQueue: ";
           std::cin >> input;
-          min3_heap.Insert(input);
-          max3_heap.Insert(input);
+          int * value = new int(input);
+          min3_heap->Insert(value);
+          // max3_heap->Insert(value);
           break;
       }
       //Delete
@@ -58,23 +61,26 @@ void Executive::run() {
       }
       //min3_heap_Highest
       case 3: {
-        // std::cout << "Output: The element with the highest priority is: " << min3_heap->min3_heap_Highest() <<".\n";
+        std::cout << "Output: The element with the highest priority is: " << min3_heap->MinPQ_Highest() <<".\n";
+        // std::cout << "Output: The element with the highest priority is: " << max3_heap->MaxPQ_Highest() <<".\n";
         break;
       }
       //min3_heap_Lowest
       case 4: {
-        // std::cout << "Output: The element with the lowest priority is: " << min3_heap->min3_heap_Lowest() <<".\n";
+        std::cout << "Output: The element with the lowest priority is: " << min3_heap->MinPQ_Lowest() <<".\n";
+        // std::cout << "Output: The element with the lowest priority is: " << max3_heap->MaxPQ_Lowest() <<".\n";
         break;
       }
       //LevelOrder
       case 5: {
-          std::cout << "Output: \nLevelOrder Traversal \n";
-          min3_heap.LevelOrder();
+          min3_heap->LevelOrder();
+          // max3_heap->LevelOrder();
           break;
       }
       //Time_LowestPQ
       case 6: {
-          // std::cout << "Output: " <<min3_heap->Time_Lowestmin3_heap() <<"s.\n";
+          std::cout << "Output: " <<min3_heap->Time_MinLowestPQ() <<"s.\n";
+          // std::cout << "Output: " <<max3_heap->Time_MaxLowestPQ() <<"s.\n";
           break;
       }
       //Exit
@@ -91,7 +97,8 @@ void Executive::run() {
   }
 }
 
-bool Executive::parseInputFile() {
+bool Executive::parseInputFile(PriorityQueue pq) {
+  // pq = *min3_heap;
   std::ifstream inputFile(filePath);
   std::string input;
   char c;
@@ -99,12 +106,14 @@ bool Executive::parseInputFile() {
     while(inputFile.get(c)) {
       if (c != ' ' && c != '\n') {
         input += c;
+        // std::cout <<"current input: " <<input <<std::endl;
       }
       else {
-        std::cout << "Inserting node: " <<input <<std::endl;
+        // std::cout << "In loop, inserting: " <<input <<" into pq of size: " <<min3_heap->GetPQ_Size() <<std::endl;
         int strInt = std::stoi(input);
-        min3_heap.Insert(strInt);
-        // max3_heap.Insert(strInt);
+        int * value = new int(strInt);
+        min3_heap->Insert(value);
+        min3_heap->IncPQ_Size();
         input = "";
       }
     }

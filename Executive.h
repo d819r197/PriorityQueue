@@ -14,12 +14,17 @@ class Executive {
     //Class Methods
     int menuInput();
     void run();
-    bool parseInputFile();
+    bool parseInputFile(PriorityQueue pq);
+
+    //Helper Functions
+    PriorityQueue getMin3Heap() { return *min3_heap; }
+    PriorityQueue getMax3Heap() { return *max3_heap; }
+
 
   private:
     std::string filePath;
-    PriorityQueue min3_heap;
-    PriorityQueue max3_heap;
+    PriorityQueue * min3_heap;
+    PriorityQueue * max3_heap;
 };
 
 #endif
